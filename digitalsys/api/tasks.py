@@ -37,4 +37,6 @@ def change_status(self):
             credit_proposals_to_be_updated, ["status", "updated_at"]
         )
         logger.info("Task ended with successfully")
+    else:
+        logger.info("No credit proposals to be updated, all good")
     return "Success"
