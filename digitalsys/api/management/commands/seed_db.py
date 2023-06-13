@@ -37,7 +37,9 @@ class Command(BaseCommand):
             )
 
     def create_credit_proposals(self):
-        CreditProposal.objects.all().delete()
+        if CreditProposal.objects.count() > 0:
+            return
+
         self.create_pending_credit_proposals()
 
         for i in range(10, 20):
@@ -47,7 +49,7 @@ class Command(BaseCommand):
                 address=f"Address {str(i)}",
                 proposal_value=i * 10,
                 status=CreditProposal.CreditChoices.DENIED
-                if i <= 5
+                if i < 15
                 else CreditProposal.CreditChoices.APPROVED
             )
 
