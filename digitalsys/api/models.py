@@ -19,6 +19,7 @@ class BaseModel(models.Model):
 
 class CreditProposal(BaseModel):
     CreditChoices = Choices(
+        ("pending", "PENDING", "pending"),
         ("denied", "DENIED", "denied"),
         ("approved", "APPROVED", "approved"),
     )
@@ -30,7 +31,7 @@ class CreditProposal(BaseModel):
         max_digits=12, decimal_places=2, blank=False, null=False
     )
     status = models.CharField(
-        max_length=20, default=CreditChoices.DENIED, choices=CreditChoices, blank=False, null=False
+        max_length=20, default=CreditChoices.PENDING, choices=CreditChoices, blank=False, null=False
     )
 
     class Meta:
@@ -38,3 +39,8 @@ class CreditProposal(BaseModel):
 
     def __str__(self):
         return f"{str(self.cpf)} - {self.fullname}"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.cpf = "".join([i for i in self.cpf if i.isdigit()])
+
+        return super(CreditProposal, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
