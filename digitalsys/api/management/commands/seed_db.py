@@ -38,7 +38,9 @@ class Command(BaseCommand):
 
     def create_credit_proposals(self):
         CreditProposal.objects.all().delete()
-        for i in range(1, 10):
+        self.create_pending_credit_proposals()
+
+        for i in range(10, 20):
             CreditProposal.objects.create(
                 fullname=f"Proposal {str(i)}",
                 cpf=generate_cpf(),
@@ -50,7 +52,6 @@ class Command(BaseCommand):
             )
 
     def create_pending_credit_proposals(self):
-        CreditProposal.objects.all().delete()
         for i in range(1, 10):
             CreditProposal.objects.create(
                 fullname=f"Proposal {str(i)}",
@@ -63,5 +64,4 @@ class Command(BaseCommand):
         self.create_regular_user()
         self.create_super_user()
 
-        self.create_pending_credit_proposals()
         self.create_credit_proposals()
