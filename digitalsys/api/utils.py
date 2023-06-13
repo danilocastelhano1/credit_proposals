@@ -9,4 +9,4 @@ def generate_cpf():
 
         cpf.append(11 - val if val > 1 else 0)
 
-    return '%s%s%s.%s%s%s.%s%s%s-%s%s' % tuple(cpf)
+    return "%s%s%s.%s%s%s.%s%s%s-%s%s" % tuple(cpf)

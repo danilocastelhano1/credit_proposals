@@ -1,8 +1,7 @@
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
+from rest_framework.viewsets import ModelViewSet
 
 from digitalsys.api.models import CreditProposal
-
 from digitalsys.api.serializers import CreditProposalSerializer
 
 # Create your views here.

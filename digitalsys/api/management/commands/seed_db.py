@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from digitalsys.api.models import CreditProposal
-
 from digitalsys.api.utils import generate_cpf
 
 
@@ -13,7 +12,9 @@ class Command(BaseCommand):
     def create_regular_user(self):
         if User.objects.filter(username="jon").count() == 0:
             self.stdout.write(
-                self.style.WARNING("Iniciando o processo de Inserção de um usuário normal")
+                self.style.WARNING(
+                    "Iniciando o processo de Inserção de um usuário normal"
+                )
             )
             user = User.objects.create_user(
                 username="jon", email="jon@doe.com", password="123456", is_staff=True
@@ -22,16 +23,16 @@ class Command(BaseCommand):
                 self.style.SUCCESS("processo de criação de Usuário Finalizado")
             )
 
-            user.user_permissions.add(Permission.objects.get(codename='view_creditproposal'))
+            user.user_permissions.add(
+                Permission.objects.get(codename="view_creditproposal")
+            )
 
     def create_super_user(self):
         if User.objects.filter(username="admin").count() == 0:
             self.stdout.write(
                 self.style.WARNING("Iniciando o processo de Inserção de Super User")
             )
-            User.objects.create_superuser(
-                "admin", "admin@example.com", "admin"
-            )
+            User.objects.create_superuser("admin", "admin@example.com", "admin")
             self.stdout.write(
                 self.style.SUCCESS("processo de criação de Super User Finalizado")
             )
@@ -50,7 +51,7 @@ class Command(BaseCommand):
                 proposal_value=i * 10,
                 status=CreditProposal.CreditChoices.DENIED
                 if i < 15
-                else CreditProposal.CreditChoices.APPROVED
+                else CreditProposal.CreditChoices.APPROVED,
             )
 
     def create_pending_credit_proposals(self):
