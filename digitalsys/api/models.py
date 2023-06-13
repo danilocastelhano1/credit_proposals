@@ -3,6 +3,8 @@ import uuid
 from django.contrib.postgres.indexes import BrinIndex
 from django.db import models
 
+from model_utils import Choices
+
 
 # Create your models here.
 class BaseModel(models.Model):
@@ -16,11 +18,19 @@ class BaseModel(models.Model):
 
 
 class CreditProposal(BaseModel):
+    CreditChoices = Choices(
+        ("denied", "DENIED", "denied"),
+        ("approved", "APPROVED", "approved"),
+    )
+
     fullname = models.CharField(max_length=80, blank=False, null=False)
     cpf = models.CharField(max_length=20, blank=False, null=False)
     address = models.CharField(max_length=200, blank=False, null=False)
     proposal_value = models.DecimalField(
         max_digits=12, decimal_places=2, blank=False, null=False
+    )
+    status = models.CharField(
+        max_length=20, default=CreditChoices.DENIED, choices=CreditChoices, blank=False, null=False
     )
 
     class Meta:
