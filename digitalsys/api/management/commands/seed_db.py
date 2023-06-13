@@ -49,8 +49,19 @@ class Command(BaseCommand):
                 else CreditProposal.CreditChoices.APPROVED
             )
 
+    def create_pending_credit_proposals(self):
+        CreditProposal.objects.all().delete()
+        for i in range(1, 10):
+            CreditProposal.objects.create(
+                fullname=f"Proposal {str(i)}",
+                cpf=generate_cpf(),
+                address=f"Address {str(i)}",
+                proposal_value=i * 15,
+            )
+
     def handle(self, *args, **options):
         self.create_regular_user()
         self.create_super_user()
 
+        self.create_pending_credit_proposals()
         self.create_credit_proposals()
