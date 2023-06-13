@@ -2,6 +2,10 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
+from digitalsys.api.models import CreditProposal
+
+from digitalsys.api.utils import generate_cpf
+
 
 class Command(BaseCommand):
     help = "Seed the database informations"
@@ -32,6 +36,21 @@ class Command(BaseCommand):
                 self.style.SUCCESS("processo de criação de Super User Finalizado")
             )
 
+    def create_credit_proposals(self):
+        CreditProposal.objects.all().delete()
+        for i in range(1, 10):
+            CreditProposal.objects.create(
+                fullname=f"Proposal {str(i)}",
+                cpf=generate_cpf(),
+                address=f"Address {str(i)}",
+                proposal_value=i * 10,
+                status=CreditProposal.CreditChoices.DENIED
+                if i <= 5
+                else CreditProposal.CreditChoices.APPROVED
+            )
+
     def handle(self, *args, **options):
         self.create_regular_user()
         self.create_super_user()
+
+        self.create_credit_proposals()
