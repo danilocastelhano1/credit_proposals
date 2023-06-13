@@ -16,7 +16,7 @@ services:
       retries: 20
 
   api:
-    container_name: api_mais_todos
+    container_name: api_digital_sys
     build:
       context: .
     command:
@@ -34,16 +34,16 @@ services:
   redis:
     image: redis:7-alpine
     volumes:
-      - .:/mais_todos
+      - .:/digital_sys
 
   celery_worker:
     build:
       context: .
       dockerfile: ./Dockerfile
     command: >
-      sh -c "celery -A wallet worker --pool=solo -l INFO"
+      sh -c "celery -A digitalsys worker --pool=solo -l INFO"
     volumes:
-      - .:/mais_todos
+      - .:/digital_sys
     env_file:
       - ./.env
     depends_on:
@@ -56,9 +56,9 @@ services:
       dockerfile: ./Dockerfile
     image: django_celery_example_celery_beat
     command: >
-      sh -c "celery -A wallet beat -l INFO"
+      sh -c "celery -A digitalsys beat -l INFO"
     volumes:
-      - .:/mais_todos
+      - .:/digital_sys
     env_file:
       - ./.env
     depends_on:
@@ -69,3 +69,4 @@ volumes:
   db_data:
   static_volume:
   files_volume:
+  digital_sys:

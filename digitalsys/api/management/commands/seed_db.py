@@ -41,26 +41,12 @@ class Command(BaseCommand):
         if CreditProposal.objects.count() > 0:
             return
 
-        self.create_pending_credit_proposals()
-
-        for i in range(10, 20):
-            CreditProposal.objects.create(
-                fullname=f"Proposal {str(i)}",
-                cpf=generate_cpf(),
-                address=f"Address {str(i)}",
-                proposal_value=i * 10,
-                status=CreditProposal.CreditChoices.DENIED
-                if i < 15
-                else CreditProposal.CreditChoices.APPROVED,
-            )
-
-    def create_pending_credit_proposals(self):
         for i in range(1, 10):
             CreditProposal.objects.create(
                 fullname=f"Proposal {str(i)}",
                 cpf=generate_cpf(),
                 address=f"Address {str(i)}",
-                proposal_value=i * 15,
+                proposal_value=i * 12,
             )
 
     def handle(self, *args, **options):
