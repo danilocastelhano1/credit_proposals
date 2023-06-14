@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "0fef5c7d-a34b-40ee-a6f2-36cca4d8c641",
+		"name": "DigitalSys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19802373"
+	},
+	"item": [
+		{
+			"name": "Create Credit Proposals",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullname\": \"Danilo Antonio Castelhano\",\r\n    \"cpf\": \"343.8177.778-16\",\r\n    \"address\": \"Rua dos Sabiás, 800\",\r\n    \"proposal_value\": 551.35\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/credit_proposal/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"credit_proposal",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Credit Proposals",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"proposal_value\": 335.15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/credit_proposal/4a044b41-119e-41c0-96ce-e5665430706d/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"credit_proposal",
+						"4a044b41-119e-41c0-96ce-e5665430706d",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Credit Proposals",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"proposal_value\": 335.15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/credit_proposal/fd9ffcb1-892e-4c8c-b0b3-2530e39ea375/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"credit_proposal",
+						"fd9ffcb1-892e-4c8c-b0b3-2530e39ea375",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Credit Proposals",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"proposal_value\": 335.15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/credit_proposal/fd9ffcb1-892e-4c8c-b0b3-2530e39ea375/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"credit_proposal",
+						"fd9ffcb1-892e-4c8c-b0b3-2530e39ea375",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Credit Proposals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/credit_proposal/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"credit_proposal",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
