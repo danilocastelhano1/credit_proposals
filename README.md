@@ -8,6 +8,7 @@
 - Celery (Worker para lidar com a task)
 - Celery beat (cronjob para disparar a task a cada x minutes)
 - Redis
+- Hooks de pré-commits (organização de código)
 
 ## Passo a passo:
 - Baixe o código
