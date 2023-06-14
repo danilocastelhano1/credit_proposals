@@ -35,7 +35,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG").lower() in ("true", "1", "t", "True")
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(" ")
-
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS").split(" ")
 
 # Application definition
 
@@ -114,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 5,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

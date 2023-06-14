@@ -41,6 +41,7 @@ class CreditProposal(BaseModel):
 
     class Meta:
         verbose_name_plural = "Credit Proposals"
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{str(self.cpf)} - {self.fullname}"

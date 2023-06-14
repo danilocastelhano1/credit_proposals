@@ -1,0 +1,28 @@
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+html, body {
+    min-height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+.input {
+    width: 500px;
+    padding: 7px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 5px; /* Add a top margin */
+    margin-bottom: 5px; /* Bottom margin */
+}
