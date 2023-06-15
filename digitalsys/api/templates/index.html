@@ -6,40 +6,39 @@
     <div class="col-12">
         <form style="text-align: center" method="post">
             {% csrf_token %}
-          <label for="fullname">Nome completo:</label><br>
-          <input class="input" type="text" id="fullname" name="fullname" required><br>
-          <label for="cpf">CPF:</label><br>
-          <input class="input cpf_mask" type="text" id="cpf" name="cpf" required><br>
-          <label for="address">Endereço:</label><br>
-          <input class="input" type="text" id="address" name="address" required><br>
-          <label for="proposal_value">Valor da Proposta:</label><br>
-          <input class="input" type="number" step="0.01" id="proposal_value" name="proposal_value" required><br>
+            {% for proposal_field in proposal_fields %}
+                <label for="{{ proposal_field.field_name }}">{{ proposal_field.field_title }}:</label><br>
+                {%if proposal_field.field_type == "number"%}
+                    <input class="input" type="{{ proposal_field.field_type }}" step="0.01" id="{{ proposal_field.field_name }}" name="{{ proposal_field.field_name }}" required><br>
+                {% else %}
+                    <input class="input" type="{{ proposal_field.field_type }}" id="{{ proposal_field.field_name }}" name="{{ proposal_field.field_name }}" required><br>
+                {% endif %}
+            {% endfor %}
+
           <div class="col-12" style="margin-top: 10px;">
             <button type="submit" class="btn btn-primary">Enviar Proposta de Crédito</button>
           </div>
         </form>
     </div>
     <hr>
+
+    {% for credit_proposal in credit_proposals %}
     <table style="margin-left: auto;margin-right: auto; margin-top: 20px;">
+
         <tr>
-          <th style="padding-right: 20px;">Nome Completo</th>
-          <th style="padding-right: 20px;">CPF</th>
-          <th style="padding-right: 20px;">Endereço</th>
-          <th style="padding-right: 20px;">Valor da Proposta</th>
-          <th style="padding-right: 20px;">Status da Proposta</th>
-          <th style="padding-right: 20px;">Data da Proposta</th>
+              <th style="padding-right: 20px;">Id da proposta: {{ credit_proposal.id }} - Status {{ credit_proposal.status }}</th>
         </tr>
-        {% for credit_proposal in credit_proposals %}
-        <tr>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.fullname }}</th>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.cpf }}</th>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.address }}</th>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.proposal_value }}</th>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.status }}</th>
-          <th style="font-weight: 400; padding-right: 20px;"> {{ credit_proposal.created_at | date:"d/m/Y H:i" }}</th>
-        </tr>
+        {% for proposal in credit_proposal.proposal.all %}
+            <tr>
+              <th style="padding-right: 20px;">{{ proposal.field.field_title }}</th>
+            </tr>
+            <tr>
+                <th style="font-weight: 400; padding-right: 20px;"> {{ proposal.field_value }}</th>
+            </tr>
         {% endfor %}
     </table>
+    {% endfor %}
+
 
     <script>
         $(document).ready(function() {

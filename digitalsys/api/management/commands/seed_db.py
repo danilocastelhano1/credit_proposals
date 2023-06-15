@@ -1,8 +1,12 @@
+from typing import List
+
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from digitalsys.api.models import CreditProposal
+from digitalsys.api.models import FieldTypes
+from digitalsys.api.models import ProposalFields
 from digitalsys.api.utils import generate_cpf
 
 
@@ -24,7 +28,10 @@ class Command(BaseCommand):
             )
 
             user.user_permissions.add(
-                Permission.objects.get(codename="view_creditproposal")
+                Permission.objects.get(codename="view_creditproposal"),
+                Permission.objects.get(codename="view_proposal"),
+                Permission.objects.get(codename="view_proposalfields"),
+                Permission.objects.get(codename="view_proposalfieldsvalue"),
             )
 
     def create_super_user(self):
@@ -49,8 +56,36 @@ class Command(BaseCommand):
                 proposal_value=i * 12,
             )
 
+    def create_proposals_field(self):
+        if ProposalFields.objects.count() > 0:
+            return
+        proposal_fields_list: List[ProposalFields] = [
+            ProposalFields(
+                field_name="full_name",
+                field_title="Nome Completo",
+                field_type=FieldTypes.TEXT,
+            ),
+            ProposalFields(
+                field_name="cpf",
+                field_title="CPF do Cliente",
+                field_type=FieldTypes.TEXT,
+            ),
+            ProposalFields(
+                field_name="address",
+                field_title="Endereço do Cliente",
+                field_type=FieldTypes.TEXT,
+            ),
+            ProposalFields(
+                field_name="proposal_value",
+                field_title="Valor da Proposta",
+                field_type=FieldTypes.NUMBER,
+            ),
+        ]
+
+        ProposalFields.objects.bulk_create(proposal_fields_list)
+
     def handle(self, *args, **options):
         self.create_regular_user()
         self.create_super_user()
 
-        self.create_credit_proposals()
+        self.create_proposals_field()
